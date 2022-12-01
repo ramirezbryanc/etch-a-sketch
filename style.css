@@ -1,14 +1,14 @@
 .container {
-    min-height: 500px;
-    min-width: 500px;
-    max-width: 500px;
-    max-height: 500px;
+    min-height: 750px;
+    min-width: 750px;
+    max-width: 750px;
+    max-height: 750px;
     display: grid;
 }
 
 .grid-item {
-    min-width: 5px;
-    min-height: 5px;
-    border: 1px solid black;
+    min-width: 2px;
+    min-height: 2px;
+    border: 1px solid gray;
     color: transparent;
 }
