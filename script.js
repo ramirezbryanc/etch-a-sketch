@@ -43,6 +43,9 @@ function resizeGrid(){
     createGrid();
 }
 
+const clear = document.querySelector('.clear-grid');
+clear.addEventListener('mousedown',resizeGrid);
+
 // DRAWING SECTION
 // Function that checks if my mouse is clicked.
 let testValue;

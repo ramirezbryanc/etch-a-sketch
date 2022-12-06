@@ -1,14 +1,108 @@
+body {
+    box-sizing: border-box;
+    background-color: rgb(238, 235, 235);
+}
+
 .container {
-    min-height: 750px;
-    min-width: 750px;
-    max-width: 750px;
-    max-height: 750px;
+    min-height: 500px;
+    min-width: 500px;
+    max-width: 500px;
+    max-height: 500px;
     display: grid;
+}
+
+.padding {
+    background-color: #2e2e2d;
+    padding: 50px 50px 50px 50px;
+    border-radius: 25px;
+    box-shadow: rgba(48, 46, 46, 0.877) 0px 3px 8px;
 }
 
 .grid-item {
     min-width: 2px;
     min-height: 2px;
-    border: 1px solid gray;
-    color: transparent;
+    background-color: white;
+}
+
+.main-div {
+    display: flex;
+    justify-content: space-around;
+}
+
+.title {
+    text-align: center;
+}
+
+.slider {
+    width: 100%;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.d-pad-container {
+    display: grid;
+    min-width: 210px;
+    min-height: 210px;
+    max-width: 210px;
+    max-height: 210px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.up {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.left {
+    grid-column-start: 1;
+}
+
+.down {
+    grid-column-start: 2;
+    grid-row-start: 3;
+}
+
+.right {
+    grid-column-start: 3;
+}
+
+.buttons-container {
+    display: grid;
+    min-width: 210px;
+    min-height: 210px;
+    max-width: 210px;
+    max-height: 210px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.button-y {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.button-x {
+    grid-column-start: 1;
+}
+
+.button-a {
+    grid-column-start: 2;
+    grid-row-start: 3;
+}
+
+.button-b {
+    grid-column-start: 3;
+}
+
+.controls {
+    display: flex;
+}
+
+.select-start {
+    display: flex;
+    align-items: end;
 }
