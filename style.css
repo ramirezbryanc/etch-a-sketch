@@ -12,7 +12,7 @@ body {
 }
 
 .padding {
-    background-color: #2e2e2d;
+    background-color: #b6b64a;
     padding: 50px 50px 50px 50px;
     border-radius: 25px;
     box-shadow: rgba(48, 46, 46, 0.877) 0px 3px 8px;
@@ -22,6 +22,7 @@ body {
     min-width: 2px;
     min-height: 2px;
     background-color: white;
+    border: 0.1px solid gray;
 }
 
 .main-div {
@@ -44,10 +45,10 @@ ul {
 
 .d-pad-container {
     display: grid;
-    min-width: 210px;
-    min-height: 210px;
-    max-width: 210px;
-    max-height: 210px;
+    min-width: 180px;
+    min-height: 180px;
+    max-width: 180px;
+    max-height: 180px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
@@ -72,10 +73,10 @@ ul {
 
 .buttons-container {
     display: grid;
-    min-width: 210px;
-    min-height: 210px;
-    max-width: 210px;
-    max-height: 210px;
+    min-width: 180px;
+    min-height: 180px;
+    max-width: 180px;
+    max-height: 180px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
@@ -100,9 +101,17 @@ ul {
 
 .controls {
     display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
 .select-start {
     display: flex;
     align-items: end;
+}
+
+.buttons-container button {
+    border-radius: 100%;
+    box-shadow: rgba(68, 67, 67, 0.877) 0px 3px 8px;
+    border: 0.5px solid gray;
 }

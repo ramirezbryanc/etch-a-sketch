@@ -8,9 +8,10 @@ let gridSize = slider.value;
 slider.addEventListener('input', getSliderValue);
 
 function getSliderValue() {
-    gridSize = this.value;
+    gridSize = slider.value; // Updated this to 'slider.value' instead of this.'value' because other objects will also access this function.
     resizeGrid();
 }
+
 
 const container = document.querySelector('.container');
 function createGrid() {
@@ -43,32 +44,33 @@ function resizeGrid(){
     createGrid();
 }
 
-const clear = document.querySelector('.clear-grid');
-clear.addEventListener('mousedown',resizeGrid);
-
 // DRAWING SECTION
 // Function that checks if my mouse is clicked.
-let testValue;
+let clickChecker;
 function clickFunction(e) {
     console.log(e);
     if (e.type == 'mousedown') {
-        return testValue = 1;
+        return clickChecker = 1;
     } else {
-        return testValue = 0;
+        return clickChecker = 0;
     }
 }
 
+// Resets the clickChecker variable when a mouseup occurs inside the grid.
 function mouseUpFunction(e) {
     console.log('mouseup');
-    return testValue = 0;
+    return clickChecker = 0;
 }
 
 // Main drawing function
+let eraserToggle = 0; 
+let rgbToggler; // Value holders for toggling RGB and Eraser mode.
+
 function shadeMe(event) {
-    if ( testValue == 1) {
+    if ( clickChecker == 1 && eraserToggle == 0) {
    event.target.style.backgroundColor = "black";
-    } else {
-        return;
+    } else if ( clickChecker == 1 && eraserToggle == 1 ) {
+        event.target.style.backgroundColor = "white";
     }
 }
 
@@ -89,5 +91,51 @@ function listenMouseUp(param1) {
 
 // solution by Kev is addeventlistener onmouseover, execute function. inside function, check if mouse is clicked, if yes, execute function.
 
+// BUTTONS FUNCTIONALITY
+// D-pad buttons
+const dPadUp = document.querySelector('.up');
+dPadUp.addEventListener('mousedown', incrementOne);
 
+const dPadDown = document.querySelector('.down');
+dPadDown.addEventListener('mousedown', decrementOne);
 
+const dPadRight = document.querySelector('.right');
+dPadRight.addEventListener('mousedown', maximize);
+
+const dPadLeft = document.querySelector('.left');
+dPadLeft.addEventListener('mousedown', minimize);
+
+function incrementOne () {
+    ++slider.value;
+    getSliderValue();
+}
+
+function decrementOne () {
+    --slider.value;
+    getSliderValue();
+}
+
+function maximize () {
+    slider.value = 100;
+    getSliderValue();
+}
+
+function minimize () {
+    slider.value = 16;
+    getSliderValue();
+}
+
+// Eraser and Clear
+const eraserBtn = document.querySelector('.eraser');
+eraserBtn.addEventListener('mousedown', eraserOn);
+
+function eraserOn () {
+    if (eraserToggle == 0) {
+        eraserToggle = 1;
+    } else if (eraserToggle == 1) {
+        eraserToggle = 0;
+    }
+}
+
+const clear = document.querySelector('.clear-grid');
+clear.addEventListener('mousedown',resizeGrid);
