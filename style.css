@@ -105,9 +105,14 @@ ul {
     margin-top: 20px;
 }
 
+.middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
 .select-start {
     display: flex;
-    align-items: end;
 }
 
 .buttons-container button {

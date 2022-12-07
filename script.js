@@ -3,13 +3,16 @@
 //Pass the value to the JS function that creates the grid.
 //The grid will then be created and sized according to the value received from the range slider.
 
-const slider = document.querySelector('#grid-size');
+const slider = document.querySelector('#grid-size-selector');
 let gridSize = slider.value;
 slider.addEventListener('input', getSliderValue);
+const gridSizeText = document.querySelector('.grid-size');
+gridSizeText.textContent = `Grid Size: ${slider.value} x ${slider.value}`
 
 function getSliderValue() {
     gridSize = slider.value; // Updated this to 'slider.value' instead of this.'value' because other objects will also access this function.
     resizeGrid();
+    gridSizeText.textContent = `Grid Size: ${slider.value} x ${slider.value}`
 }
 
 
