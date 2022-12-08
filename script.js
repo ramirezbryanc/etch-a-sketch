@@ -36,7 +36,7 @@ createGrid();
 
 function deleteGrid() {
     while (container.firstChild) {
-      container.removeEventListener('mouseover', shadeMe);
+      container.removeEventListener('mouseover', colorMe);
       container.lastChild = null;
       container.removeChild(container.lastChild);
     }
@@ -67,19 +67,43 @@ function mouseUpFunction(e) {
 
 // Main drawing function
 let eraserToggle = 0; 
-let rgbToggler; // Value holders for toggling RGB and Eraser mode.
+let rainbowToggle = 0; // Value holders for toggling RGB and Eraser mode.
+let shadowToggle = 0;
 
-function shadeMe(event) {
-    if ( clickChecker == 1 && eraserToggle == 0) {
-   event.target.style.backgroundColor = "black";
+function colorMe(event) {
+    if ( clickChecker == 1 && eraserToggle == 0 && rainbowToggle == 0) {
+        event.target.style.backgroundColor = "rgb(0,0,0)";
     } else if ( clickChecker == 1 && eraserToggle == 1 ) {
         event.target.style.backgroundColor = "white";
+    } else if ( clickChecker == 1 && rainbowToggle == 1 ) {
+        randomColor();
+        event.target.style.backgroundColor = `rgb(${colorArray[0]}, ${colorArray[1]}, ${colorArray[2]})`;
     }
+}
+
+// Rainbow
+let red = 0;
+let green = 0;
+let blue = 0;
+
+const colorArray = [red, green, blue];
+
+function randomColor () {
+    colorArray[0] = Math.floor(Math.random() * 256);
+    colorArray[1] = Math.floor(Math.random() * 256);
+    colorArray[2] = Math.floor(Math.random() * 256);
+}
+
+// Shade
+function incrementShade () {
+    colorArray[0] += -25;
+    colorArray[1] += -25;
+    colorArray[2] += -25;
 }
 
 // The event listener that listens to mousehover.
 function listenHover(param1) {
-    param1.addEventListener('mouseover', shadeMe);
+    param1.addEventListener('mouseover', colorMe);
 }
 
 // The event listener that listens to clicks.
@@ -91,8 +115,6 @@ function listenClick(param1) {
 function listenMouseUp(param1) {
     param1.addEventListener('mouseup', mouseUpFunction);
 }
-
-// solution by Kev is addeventlistener onmouseover, execute function. inside function, check if mouse is clicked, if yes, execute function.
 
 // BUTTONS FUNCTIONALITY
 // D-pad buttons
@@ -142,3 +164,14 @@ function eraserOn () {
 
 const clear = document.querySelector('.clear-grid');
 clear.addEventListener('mousedown',resizeGrid);
+
+const rainbowBtn = document.querySelector('.button-a');
+rainbowBtn.addEventListener('mousedown', rainbowOn);
+
+function rainbowOn() {
+    if (rainbowToggle == 0) {
+        rainbowToggle = 1;
+    } else if (rainbowToggle == 1) {
+        rainbowToggle = 0;
+    }
+}
