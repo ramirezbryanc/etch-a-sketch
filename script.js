@@ -22,6 +22,7 @@ function createGrid() {
         const squares = document.createElement('div');
         squares.classList.add('grid-item');
         squares.classList.add(`box-${i}`);
+        squares.style.backgroundColor = "rgb(255,255,255)";
         container.appendChild(squares);
     }
     container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr`;
@@ -61,7 +62,6 @@ function clickFunction(e) {
 
 // Resets the clickChecker variable when a mouseup occurs inside the grid.
 function mouseUpFunction(e) {
-    console.log('mouseup');
     return clickChecker = 0;
 }
 
@@ -73,6 +73,9 @@ let shadowToggle = 0;
 function colorMe(event) {
     if ( clickChecker == 1 && eraserToggle == 0 && rainbowToggle == 0) {
         event.target.style.backgroundColor = "rgb(0,0,0)";
+        /*getCurrentColor(event);
+        incrementShade();
+        event.target.style.backgroundColor = `rgb(${shadeArray[0]}, ${shadeArray[1]}, ${shadeArray[2]})`*/
     } else if ( clickChecker == 1 && eraserToggle == 1 ) {
         event.target.style.backgroundColor = "white";
     } else if ( clickChecker == 1 && rainbowToggle == 1 ) {
@@ -85,7 +88,6 @@ function colorMe(event) {
 let red = 0;
 let green = 0;
 let blue = 0;
-
 const colorArray = [red, green, blue];
 
 function randomColor () {
@@ -95,10 +97,26 @@ function randomColor () {
 }
 
 // Shade
-function incrementShade () {
-    colorArray[0] += -25;
-    colorArray[1] += -25;
-    colorArray[2] += -25;
+// On hover, get the current bgcolor RGB values, return to an array, then subtract 25 to the individual RGB values.
+
+let sRed = 0;
+let sGreen = 0;
+let sBlue = 0;
+const shadeArray = [sRed, sGreen, sBlue];
+
+function getCurrentColor(event) {
+    console.log(event.target.style.backgroundColor);
+    shadeArray[0] = Number(event.target.style.backgroundColor.slice(4,7));
+    shadeArray[1] = Number(event.target.style.backgroundColor.slice(9,12));
+    shadeArray[2] = Number(event.target.style.backgroundColor.slice(14,17));
+    console.log(shadeArray);
+}
+
+function incrementShade() {
+    shadeArray[0] += -25;
+    shadeArray[1] += -25;
+    shadeArray[2] += -25;
+    console.log(shadeArray);
 }
 
 // The event listener that listens to mousehover.
