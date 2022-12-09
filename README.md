@@ -2,12 +2,12 @@
 
 My project submission for TOP's etch-a-sketch project.
 
-Current features:
-Grid sizing using sliders and buttons  
-Normal pen  
-Rainbow pen  
-Eraser  
-Clear sketch  
+Current features:  
+- Grid sizing using sliders and buttons  
+- Normal pen  
+- Rainbow pen  
+- Eraser  
+- Clear sketch  
 
 This is an ongoing project.
 
