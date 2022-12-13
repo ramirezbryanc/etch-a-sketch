@@ -71,16 +71,17 @@ let rainbowToggle = 0; // Value holders for toggling RGB and Eraser mode.
 let shadowToggle = 0;
 
 function colorMe(event) {
-    if ( clickChecker == 1 && eraserToggle == 0 && rainbowToggle == 0) {
+    if ( clickChecker == 1 && eraserToggle == 0 && rainbowToggle == 0 && shadowToggle == 0) {
         event.target.style.backgroundColor = "rgb(0,0,0)";
-        /*getCurrentColor(event);
-        incrementShade();
-        event.target.style.backgroundColor = `rgb(${shadeArray[0]}, ${shadeArray[1]}, ${shadeArray[2]})`*/
     } else if ( clickChecker == 1 && eraserToggle == 1 ) {
         event.target.style.backgroundColor = "white";
-    } else if ( clickChecker == 1 && rainbowToggle == 1 ) {
+    } else if ( clickChecker == 1 && rainbowToggle == 1 && shadowToggle == 0) {
         randomColor();
         event.target.style.backgroundColor = `rgb(${colorArray[0]}, ${colorArray[1]}, ${colorArray[2]})`;
+    } else if (clickChecker == 1 && rainbowToggle == 0 && shadowToggle == 1) {
+        getCurrentColor(event);
+        incrementShade();
+        event.target.style.backgroundColor = `rgb(${shadeArray[0]}, ${shadeArray[1]}, ${shadeArray[2]})`
     }
 }
 
@@ -102,24 +103,27 @@ function randomColor () {
 let sRed = 0;
 let sGreen = 0;
 let sBlue = 0;
+let tRed = 0;
+let tGreen = 0;
+let tBlue = 0;
 const shadeArray = [sRed, sGreen, sBlue];
+let newArray = [tRed, tGreen, tBlue];
 
 function getCurrentColor(event) {
-    console.log(event.target.style.backgroundColor);
-    shadeArray[0] = Number(event.target.style.backgroundColor.slice(4,7));
-    shadeArray[1] = Number(event.target.style.backgroundColor.slice(9,12));
-    shadeArray[2] = Number(event.target.style.backgroundColor.slice(14,17));
-    console.log(shadeArray);
+    newArray = event.target.style.backgroundColor.split(/[,()]/);
+    shadeArray[0] = Number(newArray[1]);
+    shadeArray[1] = Number(newArray[2]);
+    shadeArray[2] = Number(newArray[3]);
 }
 
 function incrementShade() {
     shadeArray[0] += -25;
     shadeArray[1] += -25;
     shadeArray[2] += -25;
-    console.log(shadeArray);
 }
 
 // The event listener that listens to mousehover.
+// For these functions, the parameter refers to the individual square divs
 function listenHover(param1) {
     param1.addEventListener('mouseover', colorMe);
 }
@@ -189,7 +193,26 @@ rainbowBtn.addEventListener('mousedown', rainbowOn);
 function rainbowOn() {
     if (rainbowToggle == 0) {
         rainbowToggle = 1;
+        shadowToggle = 0;
+        rainbowBtn.textContent = "RGB: \n On";
+        shadowBtn.textContent = "Shade";
     } else if (rainbowToggle == 1) {
         rainbowToggle = 0;
+        rainbowBtn.textContent = "RGB";
+    }
+}
+
+const shadowBtn = document.querySelector('.button-b');
+shadowBtn.addEventListener('mousedown', shadowOn);
+
+function shadowOn() {
+    if (shadowToggle == 0) {
+        rainbowToggle = 0;
+        shadowToggle = 1;
+        shadowBtn.textContent = "Shade: \n On";
+        rainbowBtn.textContent = "RGB";
+    } else if (shadowToggle == 1) {
+        shadowToggle = 0;
+        shadowBtn.textContent = "Shade";
     }
 }
