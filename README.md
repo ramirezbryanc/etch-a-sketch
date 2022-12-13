@@ -10,7 +10,8 @@ Current features:
 - Clear sketch  
 - Shading Mode 
 
-What's next: Implementation of pen color selection by selecting a color from a hue modal.
+What's next: 
+- Implementation of pen color selection by selecting a color from a hue modal.
 
 This is an ongoing project. 
  
