@@ -11,7 +11,8 @@ Current features:
 - Shading Mode 
 
 What's next: 
-- Implementation of pen color selection by selecting a color from a hue modal.
+- Color Picker.
+- Code cleaning.
 
 This is an ongoing project. 
  
