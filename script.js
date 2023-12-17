@@ -16,13 +16,29 @@ function getSliderValue() {
 }
 
 
-const container = document.querySelector('.container');
+const container = document.querySelector('.container-grid-squares');
+
 function createGrid() {
     for (let i=0; i<gridSize ** 2; i++) {
         const squares = document.createElement('div');
         squares.classList.add('grid-item');
         squares.classList.add(`box-${i}`);
-        squares.style.backgroundColor = "rgb(255,255,255)";
+        const gridSizeValue = document.querySelector('.slider').value;
+
+        if (i == 0) {
+            squares.classList.add('top-left-corner');
+        }
+        if (i == (gridSizeValue -1)) {
+            squares.classList.add('top-right-corner');
+        }
+        if (i == ((gridSizeValue * gridSizeValue) - 1)) {
+            squares.classList.add('bottom-right-corner');
+        }
+        if (i == ((gridSizeValue *gridSizeValue)- gridSizeValue)) {
+            squares.classList.add('bottom-left-corner');
+        }
+
+        squares.style.backgroundColor = "rgb(146, 157, 151)";
         container.appendChild(squares);
     }
     container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr`;
@@ -43,7 +59,8 @@ function deleteGrid() {
     }
   }
 
-function resizeGrid(){
+
+function resizeGrid() {
     deleteGrid();
     createGrid();
 }
@@ -74,7 +91,7 @@ function colorMe(event) {
     if ( clickChecker == 1 && eraserToggle == 0 && rainbowToggle == 0 && shadowToggle == 0) {
         event.target.style.backgroundColor = "rgb(0,0,0)";
     } else if ( clickChecker == 1 && eraserToggle == 1 ) {
-        event.target.style.backgroundColor = "white";
+        event.target.style.backgroundColor = "rgb(146, 157, 151)";
     } else if ( clickChecker == 1 && rainbowToggle == 1 && shadowToggle == 0) {
         randomColor();
         event.target.style.backgroundColor = `rgb(${colorArray[0]}, ${colorArray[1]}, ${colorArray[2]})`;
@@ -141,16 +158,16 @@ function listenMouseUp(param1) {
 // BUTTONS FUNCTIONALITY
 // D-pad buttons
 const dPadUp = document.querySelector('.up');
-dPadUp.addEventListener('mousedown', incrementOne);
+dPadUp.addEventListener('click', incrementOne);
 
 const dPadDown = document.querySelector('.down');
-dPadDown.addEventListener('mousedown', decrementOne);
+dPadDown.addEventListener('click', decrementOne);
 
 const dPadRight = document.querySelector('.right');
-dPadRight.addEventListener('mousedown', maximize);
+dPadRight.addEventListener('click', maximize);
 
 const dPadLeft = document.querySelector('.left');
-dPadLeft.addEventListener('mousedown', minimize);
+dPadLeft.addEventListener('click', minimize);
 
 function incrementOne () {
     ++slider.value;
@@ -174,45 +191,65 @@ function minimize () {
 
 // Eraser and Clear
 const eraserBtn = document.querySelector('.eraser');
-eraserBtn.addEventListener('mousedown', eraserOn);
+eraserBtn.addEventListener('click', eraserOn);
+
+const rgbLed = document.querySelector('#rgb-led');
+const shadeLed = document.querySelector('#shade-led');
+const eraserLed = document.querySelector('#eraser-led');
 
 function eraserOn () {
     if (eraserToggle == 0) {
         eraserToggle = 1;
+        eraserLed.style.backgroundColor = lit;
+        eraserLed.style.boxShadow = litShadow;
     } else if (eraserToggle == 1) {
         eraserToggle = 0;
+        eraserLed.style.backgroundColor = unlit;
+        eraserLed.style.boxShadow = '';
     }
 }
 
+
 const clear = document.querySelector('.clear-grid');
-clear.addEventListener('mousedown',resizeGrid);
+clear.addEventListener('click',resizeGrid);
 
 const rainbowBtn = document.querySelector('.button-a');
-rainbowBtn.addEventListener('mousedown', rainbowOn);
+rainbowBtn.addEventListener('click', rainbowOn);
+
 
 function rainbowOn() {
     if (rainbowToggle == 0) {
         rainbowToggle = 1;
         shadowToggle = 0;
-        rainbowBtn.textContent = "RGB: \n On";
-        shadowBtn.textContent = "Shade";
+        shadeLed.style.backgroundColor = unlit; // Unlight shade led
+        shadeLed.style.boxShadow = '';
+        rgbLed.style.backgroundColor = lit; // light rgb led
+        rgbLed.style.boxShadow = litShadow;
     } else if (rainbowToggle == 1) {
         rainbowToggle = 0;
-        rainbowBtn.textContent = "RGB";
+        rgbLed.style.backgroundColor = unlit; //rgb unlight
+        rgbLed.style.boxShadow = '';
     }
 }
 
 const shadowBtn = document.querySelector('.button-b');
-shadowBtn.addEventListener('mousedown', shadowOn);
+shadowBtn.addEventListener('click', shadowOn);
 
 function shadowOn() {
     if (shadowToggle == 0) {
         rainbowToggle = 0;
         shadowToggle = 1;
-        shadowBtn.textContent = "Shade: \n On";
-        rainbowBtn.textContent = "RGB";
+        shadeLed.style.backgroundColor = lit; // light shade led
+        shadeLed.style.boxShadow = litShadow;
+        rgbLed.style.backgroundColor = unlit; //rgb unlight
+        rgbLed.style.boxShadow = '';
     } else if (shadowToggle == 1) {
         shadowToggle = 0;
-        shadowBtn.textContent = "Shade";
+        shadeLed.style.backgroundColor = unlit; //rgb unlight
+        shadeLed.style.boxShadow = '';
     }
 }
+
+const unlit = '#929d97';
+const lit = '#ca1a21';
+const litShadow = '0px 0px 10px #ff552e';
