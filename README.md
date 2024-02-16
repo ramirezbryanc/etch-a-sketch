@@ -16,7 +16,7 @@ What's next:
 
 This is an ongoing project. 
  
-Check the live app here: [Live App](https://bigbossbry.github.io/etch-a-sketch/)
+Check the live app here: [Live App](https://ramirezbryanc.github.io/etch-a-sketch/)
 
 Creator's Note: 
  
